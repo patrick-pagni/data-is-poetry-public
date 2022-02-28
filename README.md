@@ -1,10 +1,103 @@
-# Executive Summary
+<style>
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+<img src = 'https://user-images.githubusercontent.com/69991618/111783988-c2483380-88b2-11eb-806b-6e2bbd495298.png' width = 100 alt = 'GA'>
+
+# Data is like poetry: predicting a poet's sex, continent of origin and dates based on their poetry
+
+## Overview
+
+This project was completed as part of the General Assembly Data Science Immersive course.
+
+This document outlines the problem, hypothesis, methodology, conclusion and tools used.
+
+-----
+-----
+
+## Repository Contents
+
+- Technical Report:
+  - Executive Summary
+  - Notebooks:
+    - Data Collection
+    - Data Cleaning
+    - EDA
+    - Model Evaluation
+  - Models:
+    - Dates Ridge regression
+    - Sex Logistic Regression
+    - Continent Logistic Regression
+- Read Me
+
+*n.b. datasets are not included.*
+
+-----
+-----
+
+## Problem Statement
+
+Everyone has their own unique way of using language. When I think, speak and write I am using English, but I am specifically using my English. But I don't exist in a vacuum -- the way I use language is influenced by my circumstances: where I live, who my friends are, the time I was born. You can learn a lot about me from the way I use language.
+
+The aim of this model is to use data to explore this relationship and understand just how much we can tell about someone from how they use language.
+
+-----
+-----
 
 ## Goals
 
-This project had three goals: using NLP can I build 3 separate models to predict a poet's sex, country  of origin and dates.
+This project had three goals. Taking a poem as an input, use NLP and feature engineering to build 3 models to predict the following details about its author:
 
-The models to predict the sex and country of origin for a poet are classification models. The model predicting a poet's dates is a regression model, specifically a random forest regressor.
+- Sex
+- Continent of origin *(originally country_of_origin)*
+- Dates
+
+To predict the sex and continent of origin of the poet, I have built 2 classification models. To predict each poet's dates, I have built a regression model.
+
+-----
+-----
+
+## Data Source
+
+[Kaggle - Poetry Foundation](https://www.kaggle.com/tgdivy/poetry-foundation-poems/version/1)
+
+The linked dataset contains 14,000 poems from Poetry Foundation.
+
+All poems are labeled with the title, author and poetry foundation tags attached to them. This formed the spine of my final dataset.
+
+Since the above dataset does not contain the target variables I am looking for, I used the poet column to compile a list of the poet's within the dataset. Then, using a combination of scraping wikipedia, probabilistic analysis based on first names and manual input, I labeled the rows with the target variables.
+
+-----
+-----
+
+## Cleaning & Processing
+
+As mentioned above, the spine of the dataset did not include the target variables I wanted to predict. Therefore data cleaning and processing requirements centred principally around the following:
+
+- Preparing target variables using web scrapes and probabilistic analysis of first names
+- Removing html tags from title and poem columns
+- Dummifying tag list to get usable tag columns
+- Developing NLP regex token to capture words and punctuation
+
+-----
+-----
+
+## Exploratory Data Analysis
+
+The EDA process lef me to draw the following conclusions from the dataset:
+
+1. The class imbalance in the `country_of_origin` columns for this dataset has led me to aggregate the countries by their continent and use this as my target variable instead.
+2. There is moderate class imbalance within the `sex` target column, with male being the largest class. This imbalance is not so drastic that I cannot build my model using this target variable.
+3. The `dates` column has a negative skew, with most values falling between 1900 and 2000.
+4. After investigating several outliers for the `dates` column, I can confirm they are legitimate values and will be kept in the dataset.
+5. The `number_of_lines` and `number_of_stanzas` columns are both positively skewed, and are heavily dominated by lower values - this means legitimate higher values are being flagged as outliers.
+6. After investigating several of these outlier I can confirm they are legitimate recordings and will remain within the dataset.
+
+
 
 -----
 -----
