@@ -1,11 +1,3 @@
-<style>
-    img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-</style>
-
 <img src = 'https://user-images.githubusercontent.com/69991618/111783988-c2483380-88b2-11eb-806b-6e2bbd495298.png' width = 100 alt = 'GA'>
 
 # Data is like poetry: predicting a poet's sex, continent of origin and dates based on their poetry
