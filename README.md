@@ -89,7 +89,7 @@ The EDA process lef me to draw the following conclusions from the dataset:
 5. The `number_of_lines` and `number_of_stanzas` columns are both positively skewed, and are heavily dominated by lower values - this means legitimate higher values are being flagged as outliers.
 6. After investigating several of these outlier I can confirm they are legitimate recordings and will remain within the dataset.
 
-
+![Country Histogram](technical-report/plots/country_histogram.png)
 
 -----
 -----
