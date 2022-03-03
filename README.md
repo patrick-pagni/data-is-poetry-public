@@ -210,6 +210,8 @@ The EDA process led me to draw the following conclusions from the dataset:
 
   ![Continent Wordcloud](technical-report/plots/continent_clouds.png)
 
+For a detailed discussion of the above, and further analysis, see the following book:
+[Exploratory Data Analysis](technical-report/EDA.ipynb)
 
 -----
 ## NLP
@@ -224,7 +226,7 @@ The crux of this project is to use Natural Language Processing to predict charac
 
 4. Use ngram_range from 1 to 3. What this means is the vectorizer will create TF-IDF weights for single words, as well as combinations of up to and including 3 words. This causes a significant proliferation of the dataset.
 
-Going forward, I want to create a pipeline for this process, whereby I can then use a Grid Search to optimise for the best set of stop words, best vectorizer, best token_pattern and best ngram_range. I have been unable to do so until now, because of the time constraints of the project. 
+Going forward, I want to create a pipeline for this process, whereby I can then use a Grid Search to optimise for the best set of stop words, best vectorizer, best token_pattern and best ngram_range. I have been unable to do so until now, because of the time constraints of the project.
 
 -----
 
@@ -370,6 +372,9 @@ It is important to flag the following limitation for this model as well:
 
 I think confirming the translation dates for poems which have been translated would also improve the model.
 
+For code and further discussion of model findings, see the following notebook:
+[Model Evaluation](technical-report/model-evaluation.ipynb)
+
 -----
 
 ## Risks, limitations and assumptions
@@ -422,4 +427,4 @@ Despite the pitfalls outlined in the above section, we can still call this proje
 
 - Make a website with an API and training and testing tabs so people can try the model out on their own poems
 
-  - The final step I would like to take after the above has been completed is to deploy the model, and make it available to the public.
+  - The final step I would like to take after the above has been completed is to deploy the model, and make it available to the public
