@@ -13,23 +13,40 @@ This document outlines the problem, hypothesis, methodology, conclusion and tool
 ## Repository Contents
 
 - Technical Report:
+
   - Executive Summary
   - Notebooks:
+
     - Data Collection
     - Data Cleaning
     - EDA
     - Model Evaluation
+
   - Models:
+
     - Dates Ridge regression
     - Sex Logistic Regression
     - Continent Logistic Regression
+
   - Plots:
-    - Sex histogram
-    - Country of origin histogram
-    - Continent histogram
-    - Dates histogram
-    - Sex word cloud
-    - Continent word cloud
+
+    - EDA
+
+      - Sex histogram
+      - Country of origin histogram
+      - Continent histogram
+      - Dates histogram
+      - Sex word cloud
+      - Continent word cloud
+
+    - Model Evaluation
+
+      - Sex Confusion Matrix
+      - Sex ROC plot
+      - Continent Confusion Matrix
+      - Continent ROC plot
+      - Dates Regression Plot
+
 - Read Me
 
 *n.b. datasets are not included.*
