@@ -109,20 +109,32 @@ The EDA process led me to draw the following conclusions from the dataset:
 1. The class imbalance in the `country_of_origin` columns for this dataset has led me to aggregate the countries by their continent and use this as my target variable instead.
 
   ![Country Histogram](technical-report/plots/country_histogram.png)
-    ***Figure 1.** Histogram showing distribution of country of origin in poems dataset*
+  
+  ***Figure 1.** Histogram showing distribution of country of origin in poems dataset*
+
+  -----
 
   ![Continent Histogram](technical-report/plots/continent_histogram.png)
+  
   ***Figure 2.** Histogram showing distribution of continent in poems dataset*
+
+  -----
 
 2. There is moderate class imbalance within the `sex` target column, with male being the largest class. This imbalance is not so drastic that I cannot build my model using this target variable.
 
   ![Continent Histogram](technical-report/plots/sex_histogram.png)
+
   ***Figure 3.** Histogram showing distribution of sex in poems dataset*
+
+  -----
 
 3. The `dates` column has a negative skew, with most values falling between 1900 and 2000.
 
   ![Dates Histogram](technical-report/plots/dates_histogram.png)
+  
   ***Figure 4.** Histogram showing distribution of dates in poems dataset*
+
+  -----
 
 4. After creating word clouds for each sex and each continent, there are the following differences between how each group uses words:
 
@@ -205,7 +217,10 @@ The EDA process led me to draw the following conclusions from the dataset:
   We can see there is great similarity between the sexes, but there is also some difference.
 
   ![Sex Wordcloud](technical-report/plots/sex_clouds.png)
+  
   ***Figure 5.** Word cloud showing how different sexes use words*
+
+  -----
 
 ### `continent`
 
@@ -220,7 +235,8 @@ The EDA process led me to draw the following conclusions from the dataset:
   These word clouds are useful for showcasing that there are distinctions in terms of how language is used across geographical locations.
 
   ![Continent Wordcloud](technical-report/plots/continent_clouds.png)
-    ***Figure 6.** Word cloud showing how different continents use words*
+  
+  ***Figure 6.** Word cloud showing how different continents use words*
 
 For a detailed discussion of the above, and further analysis, see the following book:
 [Exploratory Data Analysis](technical-report/EDA.ipynb)
@@ -299,7 +315,10 @@ This is an improvement of approximately 3% over the baseline accuracy.
 Unsurprisingly, this yielded a model that was very good at correctly classifying male poets, but was less effective at identifying female poets with the majority of misclassifications being poems written by female poets that were classified as having been written by male poets.
 
 ![Sex Confusion Matrix](technical-report/plots/sex_cm.png)
+
 ***Figure 7.** Sex classifier confusion matrix*
+
+-----
 
 The following condition will undermine the models predictive power of the sex of a poet:
 
@@ -326,7 +345,10 @@ The accuracy scores for this model show it is better at predicting where a poem 
 I also plotted an ROC curve to understand the intermingling of classes:
 
 ![Continent ROC](technical-report/plots/continent_roc.png)
+
 ***Figure 8.** Continent ROC Plot*
+
+-----
 
 The AUC-ROC shows us how the false positive rate for a given class grows as you increase the true positive rate. A perfect curve would be a vertical line from the origin up the y-axis, and then a horizontal line along the top of the graph. The AUC for a perfect curve is equal to 1. This tells us the closer the score is to 1, the better our model. An AUC score of 0.5 is equivalent to guessing at random.
 
@@ -341,7 +363,10 @@ All of these scores are greater than 0.5, and therefore the model is better at c
 Finally, I have plotted a confusion matrix:
 
 ![Continent Confusion Matrix](technical-report/plots/continent_cm.png)
+
 ***Figure 9.** Continent confusion matrix*
+
+-----
 
 From the above plot we can see that this model is very good at classifying poems from `north_america`, and is good at classifying poems from `europe`. It is, however, very poor at classifying poems from the rest of the world. This is unsurprising given the class imbalance within the dataset: only 6% of the poems within the dataset are from the rest of the world. The dominance of the other two classes makes it very unlikely the model will select a poem from the rest of the world.
 
@@ -366,7 +391,10 @@ The cross-validation score, and test score are both approximately 0.56. This mea
 To visualise this, I created the following plot:
 
 ![Dates Regression Plot](technical-report/plots/dates_regplot.png)
+
 ***Figure 10.** Dates Regression Plot*
+
+-----
 
 After visualising the data, we can see that the model seems to reduce variance better for poems dating between 1800 and 2000. This is where the data set distribution is most dense. Where the dataset is more sparse (pre-1800), the model is less effective at minimising this variance.
 
