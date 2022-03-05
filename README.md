@@ -267,11 +267,11 @@ I am suspicious of this, as this is the estimator with the maximum penalty appli
 
 ### Continent_of_origin
 
-For this model I ran a GridSearch on a Logistic Regression. Logistic regressions tend to perform better when there is class imbalance because and Decision Tree will tend to predict the largest class every time.
+Again, because of the class imbalance within the continent_of_origin column, for this model I ran a GridSearch on a Logistic Regression.
 
 I found the best estimator to be : `LogisticRegression(C=100.0, max_iter=10000)`.
 
-Again, I am suspicious of this, as this is also the estimator with the maximum penalty applied in my GridSearch. As a next step, I would increase the maximum penalty allowed for this GridSearch.
+Similarly, I am suspicious of this, as this is also the estimator with the maximum penalty applied in my GridSearch. As a next step, I would increase the maximum penalty allowed for this GridSearch.
 
 ### Dates
 
