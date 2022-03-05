@@ -84,6 +84,7 @@ All poems are labeled with the title, author and poetry foundation tags attached
 Since the above dataset does not contain the target variables I am looking for, I used the poet column to compile a list of the poet's within the dataset. Then, using a combination of scraping wikipedia, probabilistic analysis based on first names and manual input, I labeled the rows with the target variables.
 
 -----
+
 ## Cleaning & Processing
 
 As mentioned above, the spine of the dataset did not include the target variables I wanted to predict. Therefore data cleaning and processing requirements centred principally around the following:
@@ -107,35 +108,31 @@ The EDA process led me to draw the following conclusions from the dataset:
 
 1. The class imbalance in the `country_of_origin` columns for this dataset has led me to aggregate the countries by their continent and use this as my target variable instead.
 
-  ###### Figure 1. Histogram showing distribution of country of origin in poems dataset
-
   ![Country Histogram](technical-report/plots/country_histogram.png)
-
-  ###### Figure 2. Histogram showing distribution of continent in poems dataset
+    ***Figure 1.** Histogram showing distribution of country of origin in poems dataset*
 
   ![Continent Histogram](technical-report/plots/continent_histogram.png)
+  ***Figure 2.** Histogram showing distribution of continent in poems dataset*
 
 2. There is moderate class imbalance within the `sex` target column, with male being the largest class. This imbalance is not so drastic that I cannot build my model using this target variable.
 
-  ###### Figure 3. Histogram showing distribution of sex in poems dataset
-
   ![Continent Histogram](technical-report/plots/sex_histogram.png)
+  ***Figure 3.** Histogram showing distribution of sex in poems dataset*
 
 3. The `dates` column has a negative skew, with most values falling between 1900 and 2000.
 
-  ###### Figure 4. Histogram showing distribution of dates in poems dataset
-
   ![Dates Histogram](technical-report/plots/dates_histogram.png)
+  ***Figure 4.** Histogram showing distribution of dates in poems dataset*
 
 4. After creating word clouds for each sex and each continent, there are the following differences between how each group uses words:
 
-  #### `sex`
+### `sex`
 
   Initially, there was significant overlap in the words used by both sexes. Words, such as, 'now', 'love', 'eye' and 'will' were dominant for both classes. My thought here was not that there was no difference, but that there are words which are more commonly used in the English language across all sexes; the difference exists further down the rabbit hole.
 
   To handle this, I iteratively added words to my exception list (stopwords) to filter out the more dominant words across both sexes and used the following code to build the word clouds:
 
-    ```
+    ```python
     # Add words to stopwords list to filter out dominant words across both sexes
     stopwords = STOPWORDS.update(['now','know','eye','hand','love', 'day', 'see','will','one','see', 'light', 'say','back','us','time','come','night','still','said'])
 
@@ -201,36 +198,35 @@ The EDA process led me to draw the following conclusions from the dataset:
 
   After doing this we were able to yield the following conclusions:
 
-  - The words 'man' and 'thing' are used more predominantly by males.
-  - Female poets seem use the words 'way' amd 'make' with more frequency.
-  - Female poets use the word 'mother' far more than male poets.
+    - The words 'man' and 'thing' are used more predominantly by males.
+    - Female poets seem use the words 'way' amd 'make' with more frequency.
+    - Female poets use the word 'mother' far more than male poets.
 
   We can see there is great similarity between the sexes, but there is also some difference.
 
-  ###### Figure 5. Word cloud showing how different sexes use words
-
   ![Sex Wordcloud](technical-report/plots/sex_clouds.png)
+  ***Figure 5.** Word cloud showing how different sexes use words*
 
-  #### `continent`
+### `continent`
 
   For the continent wordcloud, i used the same set of stopwords I created from the sex plot from the beginning.
 
   We can see the following insights from the below word clouds:
 
-  - The Europe word cloud is dominated by the words 'thee' and 'thy' - these are archaic terms, which make sense since England was the epicentre for poetry in the literary canon until the early 20th century.
-  - 'Light' is a dominant word for North America, and it does not feature as heavily in Europe and the rest of the world.
-  - 'God; is more dominant word for Europe, whereas it is less dominant for North America and the rest of the world.
+    - The Europe word cloud is dominated by the words 'thee' and 'thy' - these are archaic terms, which make sense since England was the epicentre for poetry in the literary canon until the early 20th century.
+    - 'Light' is a dominant word for North America, and it does not feature as heavily in Europe and the rest of the world.
+    - 'God; is more dominant word for Europe, whereas it is less dominant for North America and the rest of the world.
 
   These word clouds are useful for showcasing that there are distinctions in terms of how language is used across geographical locations.
 
-  ###### Figure 6. Word cloud showing how different continents use words
-
   ![Continent Wordcloud](technical-report/plots/continent_clouds.png)
+    ***Figure 6.** Word cloud showing how different continents use words*
 
 For a detailed discussion of the above, and further analysis, see the following book:
 [Exploratory Data Analysis](technical-report/EDA.ipynb)
 
 -----
+
 ## NLP
 
 The crux of this project is to use Natural Language Processing to predict characteristics about a poem's author. Therefore, a key decision to make during this project was how to approach the NLP component. I made the following decisions:
@@ -302,9 +298,8 @@ This is an improvement of approximately 3% over the baseline accuracy.
 
 Unsurprisingly, this yielded a model that was very good at correctly classifying male poets, but was less effective at identifying female poets with the majority of misclassifications being poems written by female poets that were classified as having been written by male poets.
 
-###### Figure 7. Sex classifier confusion matrix
-
 ![Sex Confusion Matrix](technical-report/plots/sex_cm.png)
+***Figure 7.** Sex classifier confusion matrix*
 
 The following condition will undermine the models predictive power of the sex of a poet:
 
@@ -330,9 +325,8 @@ The accuracy scores for this model show it is better at predicting where a poem 
 
 I also plotted an ROC curve to understand the intermingling of classes:
 
-###### Figure 8. Continent ROC Plot
-
 ![Continent ROC](technical-report/plots/continent_roc.png)
+***Figure 8.** Continent ROC Plot*
 
 The AUC-ROC shows us how the false positive rate for a given class grows as you increase the true positive rate. A perfect curve would be a vertical line from the origin up the y-axis, and then a horizontal line along the top of the graph. The AUC for a perfect curve is equal to 1. This tells us the closer the score is to 1, the better our model. An AUC score of 0.5 is equivalent to guessing at random.
 
@@ -346,9 +340,8 @@ All of these scores are greater than 0.5, and therefore the model is better at c
 
 Finally, I have plotted a confusion matrix:
 
-###### Figure 9. Continent confusion matrix
-
 ![Continent Confusion Matrix](technical-report/plots/continent_cm.png)
+***Figure 9.** Continent confusion matrix*
 
 From the above plot we can see that this model is very good at classifying poems from `north_america`, and is good at classifying poems from `europe`. It is, however, very poor at classifying poems from the rest of the world. This is unsurprising given the class imbalance within the dataset: only 6% of the poems within the dataset are from the rest of the world. The dominance of the other two classes makes it very unlikely the model will select a poem from the rest of the world.
 
@@ -372,9 +365,8 @@ The cross-validation score, and test score are both approximately 0.56. This mea
 
 To visualise this, I created the following plot:
 
-###### Figure 10. Dates Regression Plot
-
 ![Dates Regression Plot](technical-report/plots/dates_regplot.png)
+***Figure 10.** Dates Regression Plot*
 
 After visualising the data, we can see that the model seems to reduce variance better for poems dating between 1800 and 2000. This is where the data set distribution is most dense. Where the dataset is more sparse (pre-1800), the model is less effective at minimising this variance.
 
