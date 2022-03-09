@@ -57,7 +57,7 @@ This document outlines the problem, hypothesis, methodology, conclusion and tool
 
 Everyone has their own unique way of using language. When I think, speak and write I am using English, but I am specifically using my English. But I don't exist in a vacuum -- the way I use language is influenced by my circumstances: where I live, who my friends are, the time I was born. You can learn a lot about me from the way I use language.
 
-The aim of this model is to use data to explore this relationship and understand just how much we can tell about someone from how they use language.
+The aim of this project is to use data to explore this relationship and understand just how much we can tell about someone from how they use language.
 
 -----
 
