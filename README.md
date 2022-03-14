@@ -4,7 +4,7 @@
 
 ## Overview
 
-This project was completed as part of the General Assembly Data Science Immersive course. It was a 5 week solo end-to-end project covering data collection; data cleaning and processing; exploratory data analysis; and data modelling and evaluation.
+This project was completed as part of the General Assembly Data Science Immersive course. It was a 5-week solo end-to-end project covering data collection; data cleaning and processing; exploratory data analysis; and data modelling and evaluation.
 
 This document outlines the problem, hypothesis, methodology, conclusion and tools used.
 
@@ -208,10 +208,10 @@ The EDA process led me to draw the following conclusions from the dataset:
     plt.show()
     ```
 
-  After doing this we were able to yield the following conclusions:
+  After doing this, we were able to yield the following conclusions:
 
     - The words 'man' and 'thing' are used more predominantly by males.
-    - Female poets seem use the words 'way' amd 'make' with more frequency.
+    - Female poets seem to use the words 'way' and 'make' with more frequency.
     - Female poets use the word 'mother' far more than male poets.
 
   We can see there is great similarity between the sexes, but there is also some difference.
@@ -224,13 +224,13 @@ The EDA process led me to draw the following conclusions from the dataset:
 
 ### `continent`
 
-  For the continent wordcloud, i used the same set of stopwords I created from the sex plot from the beginning.
+  For the continent wordcloud, I used the same set of stopwords I created from the sex plot from the beginning.
 
   We can see the following insights from the below word clouds:
 
     - The Europe word cloud is dominated by the words 'thee' and 'thy' - these are archaic terms, which make sense since England was the epicentre for poetry in the literary canon until the early 20th century.
     - 'Light' is a dominant word for North America, and it does not feature as heavily in Europe and the rest of the world.
-    - 'God; is more dominant word for Europe, whereas it is less dominant for North America and the rest of the world.
+    - 'God is a more dominant word for Europe, whereas it is less dominant for North America and the rest of the world.
 
   These word clouds are useful for showcasing that there are distinctions in terms of how language is used across geographical locations.
 
@@ -275,7 +275,7 @@ I will use the following predictors:
 
 ### Sex
 
-For this model I ran a GridSearch on a Logistic Regression. Logistic regressions tend to perform better when there is class imbalance because and Decision Tree will tend to predict the largest class every time.
+For this model I ran a GridSearch on a Logistic Regression. Logistic regressions tend to perform better when there is class imbalance because a Decision Tree will tend to predict the largest class every time.
 
 I found the best estimator to be : `LogisticRegression(C=35.93813663804626, max_iter=10000)`.
 
@@ -291,7 +291,7 @@ Similarly, I am suspicious of this, as this is also the estimator with the maxim
 
 ### Dates
 
-For the model designed to predict a model's dates, I initially ran a Ridge regression to control for multi-collinearity. While this yielded good results, I had to create this model quickly in order to meet the project timeline.
+For the model designed to predict a model's dates, I initially ran a Ridge regression to control for multicollinearity. While this yielded good results, I had to create this model quickly in order to meet the project timeline.
 
 With more time, I would like to run an ElasticNetCV to confirm the best penalty and best penalty ratio for this model.
 
@@ -322,9 +322,12 @@ Unsurprisingly, this yielded a model that was very good at correctly classifying
 
 The following condition will undermine the models predictive power of the sex of a poet:
 
-- The sex for many poets was determined using a proabalistic analysis of their first names, assigning sex based on whether their first name more likely belongs ot male or female
-  - This is not a foolproof way of corrcetly assigning the sex to a poet, firstly there are many names which are unisex, such as Alex. This method of categorisation may have mislabeled some poets.
+- The sex for many poets was determined using a probabilistic analysis of their first names, assigning sex based on whether their first name more likely belongs to someone who is male or female.
+
+  - This is not a foolproof way of correctly assigning the sex to a poet, firstly there are many names which are unisex, such as Alex. This method of categorisation may have mislabeled some poets.
+
   - Some female poets deliberately choose a male pen name, especially historically for commercial reasons. An example of this is George Eliot. My algorithm would have assigned male to her, even though she is known to be a female poet.
+
   - To mitigate this, I scraped the wikipedia pages for all poets with a wiki and used the pronouns used to assign a sex to them. Then for those without a wiki, I used the probablistic analysis.
 
 Verifying the cleanliness of the data will allow us to vouchsafe the results of the model, and ensure the outputs we are receiving aren't warped by an imperfect dataset.
@@ -368,13 +371,15 @@ Finally, I have plotted a confusion matrix:
 
 -----
 
-From the above plot we can see that this model is very good at classifying poems from `north_america`, and is good at classifying poems from `europe`. It is, however, very poor at classifying poems from the rest of the world. This is unsurprising given the class imbalance within the dataset: only 6% of the poems within the dataset are from the rest of the world. The dominance of the other two classes makes it very unlikely the model will select a poem from the rest of the world.
+From the above plot, we can see that this model is very good at classifying poems from `north_america`, and is good at classifying poems from `europe`. It is, however, very poor at classifying poems from the rest of the world. This is unsurprising given the class imbalance within the dataset: only 6% of the poems within the dataset are from the rest of the world. The dominance of the other two classes makes it very unlikely the model will select a poem from the rest of the world.
 
 The following condition is likely to undermine the model's ability to predict the continent of origin accurately (also listed in the executive summary):
 
 - Translated poems may cloud the data set.
+
   - A poem originating from Germany for example will be said to have originated in Europe. If it was translated by someone from North America, however, the language used is more likely to reflect that used in North America rather than Europe.
-  - This may apply to poems from the rest iof the world which may be able to be absorbed into categories.
+
+  - This may apply to poems from the rest of the world which may be able to be absorbed into categories.
 
 For a more accurate model, it would be good to identify translated poems and find out who the translator is to better label where the English used comes from.
 
@@ -386,7 +391,7 @@ The baseline for this model would be to guess the mean accuracy for every poet. 
 
 For this model to be successful we must get an r-squared better than 0.
 
-The cross-validation score, and test score are both approximately 0.56. This means the model explain 56% of the variance within the dataset. This is considerably better than the baseline prediction.
+The cross-validation score, and test score are both approximately 0.56. This means the model explains 56% of the variance within the dataset. This is considerably better than the baseline prediction.
 
 To visualise this, I created the following plot:
 
@@ -400,12 +405,13 @@ After visualising the data, we can see that the model seems to reduce variance b
 
 The intercept for the model is approximately 1913. This means that when all inputs are 0, the model will still predict a meaningful value, which is not far from the mean.
 
-The model, however, violates two assumptions for linear regression models: the assumption of homoscedasticity (that the variance in residuals for every lavel of x is constant) and the assumption that the distribution of residuals is normal. To counter this, I would transform the the dates column by taking the log of it. I would then rerun the model to check if this has solved the problem.
+The model, however, violates two assumptions for linear regression models: the assumption of homoscedasticity (that the variance in residuals for every level of x is constant) and the assumption that the distribution of residuals is normal. To counter this, I would transform the dates column by taking the log of it. I would then rerun the model to check if this has solved the problem.
 
 It is important to flag the following limitation for this model as well:
 
 - Translated poems may cloud the data set.
-  - If a poem from the 1300s was translated in 1920, the poem is more likely to reflect the language usage of 1920s rather than the 1300s.
+
+  - If a poem from the 1300s was translated in 1920, the poem is more likely to reflect the language usage of the 1920s rather than the 1300s.
 
 I think confirming the translation dates for poems which have been translated would also improve the model.
 
@@ -416,24 +422,29 @@ For code and further discussion of model findings, see the following notebook:
 
 ## Risks, limitations and assumptions
 
-- The sex for many poets was determined using a proabalistic analysis of their first names, assigning sex based on whether their first name more likely belongs ot male or female
+- The sex for many poets was determined using a proabalistic analysis of their first names, assigning sex based on whether their first name more likely belongs to male or female
 
-  - This is not a foolproof way of corrcetly assigning the sex to a poet, firstly there are many names which are unisex, such as Alex. This method of categorisation may have mislabeled some poets.
+  - This is not a foolproof way of correctly assigning the sex to a poet, firstly there are many names which are unisex, such as Alex. This method of categorisation may have mislabeled some poets.
+
   - Some female poets deliberately choose a male pen name, especially historically for commercial reasons. An example of this is George Eliot. My algorithm would have assigned male to her, even though she is known to be a female poet.
-  - To mitigate this, I scraped the wikipedia pages for all poets with a wiki and used the pronouns used to assign a sex to them. Then for those without a wiki, I used the probablistic analysis.
+  
+  - To mitigate this, I scraped the wikipedia pages for all poets with a wiki and used the pronouns used to assign a sex to them. Then for those without a wiki, I used the probabilistic analysis.
 
 - All poets in the dataset are the only person with their name with a wikipedia page.
 
   - This assumes that for a given poet 'T.S. Eliot,' there is only one wikipedia page for the poet, and the url of this page is given by the base wiki url followed by the name.
+  
   - This assumption is dangerous because we may have read data from other people into the dataset, meaning some poets may have been labeled with other people's data.
 
 - Translated poems may cloud the data set.
 
   - A poem originating from Germany for example will be said to have originated in Europe. If it was translated by someone from North America, however, the language used is more likely to reflect that used in North America rather than Europe.
+  
   - Equally, if a poem from the 1300s was translated in 1920, the poem is more likely to reflect the language usage of 1920s rather than the 1300s.
+  
   - There may still be thematic differences that the model can pick up in the language used in different parts of the world and across different languages however, although this may be difficult to interpret within the model.
 
-- The size of the dataset made computation speeds slow, limiting my ability to tune parameters within project timeframe. Now all deliverables have been met for this project, I can tune the models and try different parameters.
+- The size of the dataset made computation speeds slow, limiting my ability to tune parameters within the project timeframe. Now all deliverables have been met for this project, I can tune the models and try different parameters.
 
 -----
 
@@ -447,12 +458,13 @@ Despite the pitfalls outlined in the above section, we can still call this proje
 
 - Make more of the unused data I collected.
 
-  - During the wikipedia scraping for each poet, I had several poets where I had a successful scrape, but the format of the wiki page did not follow the same format as the majority. Therefore, we have the information for these poets, but this info has no yet been extracted. I would go on to extract this information.
+  - During the wikipedia scraping for each poet, I had several poets where I had a successful scrape, but the format of the wiki page did not follow the same format as the majority. Therefore, we have the information for these poets, but this info has not yet been extracted. I would go on to extract this information.
+
   - I extracted all poetry foundation tags which went unused as predictors. These could be valuable as perhaps there are differentiators between sex, continent and dates based on theme.
 
 - More feature engineering
   
-  - This is a very rich dataset with significnt scope for feature engineering. I want to create word groups and identify if these groups appear in the poems. Equally, more work on encoding the structure of each poem could be valuable, such as words per line, or meter.
+  - This is a very rich dataset with significant scope for feature engineering. I want to create word groups and identify if these groups appear in the poems. Equally, more work on encoding the structure of each poem could be valuable, such as words per line, or meter.
 
 - Verify data cleanliness
 
